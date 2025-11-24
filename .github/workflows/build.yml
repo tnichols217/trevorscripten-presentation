@@ -36,4 +36,5 @@ jobs:
         uses: actions/deploy-pages@v4
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "result/**/*"
+          artifacts: "result/"
+          artifactContentType: "zip"
