@@ -2,3 +2,15 @@
 title: "A Compiler and Rust"
 author: "Presented by Trevor and Wolf"
 ---
+
+## Why Rust
+
+## Dependent Libraries
+
+## Structure of our Project
+
+## Unique Implementations
+
+## Implications of our Language Design
+
+## Future Ideas
