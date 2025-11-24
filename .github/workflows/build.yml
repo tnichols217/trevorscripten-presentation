@@ -34,7 +34,10 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Build Project
+        shell: bash
+        run: |
+          nix build .#zipped
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "result/"
-          artifactContentType: "zip"
+          artifacts: "result/*"
