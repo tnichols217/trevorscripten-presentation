@@ -3,6 +3,7 @@ out
 .direnv
 .quarto
 _output
+*_files
 *.pdf
 *.html
 .gitignore
