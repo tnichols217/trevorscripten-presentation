@@ -1,5 +1,5 @@
 ---
-title: "A Compiler and Rust"
+title: "Typesccripten: A Language Implemented in Rust"
 author: "Presented by Trevor and Wolf"
 ---
 
@@ -38,11 +38,24 @@ graph TD
     %% compile
     D --> D1["mod.rs"]
     D --> D2["generate.rs"]
+    D --> D3["more to come!"]
 ```
 
 We split our project up into three *crates*. 
 
 Why? Rust macros are slow.
+
+## The components
+
+- Parse:
+  - Lexing logic (code -> tokens)
+  - Parsing logic (tokens -> AST)
+  
+- Codegen:
+  - AST -> our IR
+  
+- Compile:
+  - Our IR -> LLVM, binary, etc
 
 ## Lexing
 
@@ -177,6 +190,8 @@ let expr = recursive(|expr| {
         .map(|s| Expr::Group(Box::new(s)));
 ```
 
+It's recursive and gives you your parser generator in a callback!
+
 ## Array dimensions (continued!)
 
 ::: {.r-stack}
@@ -284,7 +299,7 @@ let addition = mterm.clone().foldl(
 
 ## Theory!
 
-![](./images/thinking.png)
+![](./images/thinking.jpg)
 
 ```ts
 bar[1 + 12] // obviously works
@@ -604,6 +619,15 @@ erDiagram
 
 ## Chained Symbol Table (but super super super super generic) {.scrollable}
 
+- We have an array of layers
+- Each layer has a map of assignments
+
+In rust, we can't have every node have a parent pointer and child pointer, because Rust's ownership model prevents circular references.
+
+If node A has a pointer to child B, and child B has a pointer back to parent A, we'd have a cycle that Rust's borrow checker cannot safely manage.
+
+## Example of the idea
+
 ```ansi
 ChainedSymbolTable {
   parents: Vec<HashMap'layer1; HashMap'layer2;>,
@@ -851,7 +875,7 @@ pub fn clear_temps(&mut self) -> Result<(), ProcessingError> {
 }
 ```
 
-## Generating IR
+## Generating IR {.scrollable}
 
 We have addresses!
 
@@ -1646,3 +1670,13 @@ nix run github:404wolf/typescripten
 
 nix run github:404wolf/typescripten#build.static
 ```
+
+## You should come to linux club!
+
+Join Case's Linux Club for more of this!
+
+::: {.r-stack}
+
+![](./images/join.png)
+
+:::
